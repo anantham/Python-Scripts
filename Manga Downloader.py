@@ -55,25 +55,35 @@ def download(url, filename, path1):
 
 
 # url of the base wesite with which to work with
-base="http://www.mangareader.net/beelzebub/"
+base="http://www.mangareader.net/388-26158-1/red-river/chapter-1.html"
 
-for j in range(1,240):
-        tempurl=base+str(j)+"/"
-        #get desktop path (my default download path)
-        path=os.getcwd()+"\\Manga\\"
-        if not os.path.exists(path+str(j)+"\\"):
-                os.makedirs(path+str(j)+"\\")
-                path=path+str(j)+"\\"
-        for i in range(20):
-                url1=tempurl+str(i+1)
+# chapter number - ch_no ; the value will change for different manga its base[34:36]
+ch_no=58
+
+#set the storage path HERE (my default download path)
+path='C:\\Users\\Aditya\\Desktop\\Work\\WallPapers\\Manga\\'
+
+for j in range(97):
+        # base[0:34] give the first 34 characters
+        tempurl=base[0:34]+str(ch_no+j)+"-"
+        #check if the folder for the 'i+1'th chapter exists
+        if not os.path.exists(path+str(j+1)+"\\"):
+                #if not make it
+                os.makedirs(path+str(j+1)+"\\")
+                #and store the pages of the chapter in the chapter folder by changing the path
+                path=path+str(j+1)+"\\"
+                
+        # the loop over the pages
+        for i in range(39):
+                finalurl=tempurl+str(i+1)+base[38:]
                 name=str(i+1)+".jpg"
                 #checks for 404 error
-                check=requests.head(url1)
+                check=requests.head(finalurl)
                 if check.status_code==404:
                         break
                         
 #call the function to start downloading!
-                download(url1,name,path)
+                download(finalurl,name,path)
         
 
         
