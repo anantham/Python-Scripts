@@ -63,7 +63,8 @@ ch_no=58
 #set the storage path HERE (my default download path)
 path='C:\\Users\\Aditya\\Desktop\\Work\\WallPapers\\Manga\\'
 
-for j in range(97):
+# this downloads chapters 5 to 97
+for j in range(4,97):
         # base[0:34] give the first 34 characters
         tempurl=base[0:34]+str(ch_no+j)+"-"
         #check if the folder for the 'i+1'th chapter exists
@@ -71,7 +72,7 @@ for j in range(97):
                 #if not make it
                 os.makedirs(path+str(j+1)+"\\")
                 #and store the pages of the chapter in the chapter folder by changing the path
-                path=path+str(j+1)+"\\"
+                temppath=path+str(j+1)+"\\"
                 
         # the loop over the pages
         for i in range(39):
@@ -83,7 +84,7 @@ for j in range(97):
                         break
                         
 #call the function to start downloading!
-                download(finalurl,name,path)
+                download(finalurl,name,temppath)
         
 
         
