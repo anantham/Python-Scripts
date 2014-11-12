@@ -3,11 +3,10 @@ import urllib
 from bs4 import BeautifulSoup
 import os
 import requests
-
+import socket
 
 def download(url, filename, path1):
-     
-        
+
         # open the page url and get the html shit into page
         page=urllib2.urlopen(url)
         
@@ -23,9 +22,15 @@ def download(url, filename, path1):
         for imglink in img:
                 # final url of the .jpg file
                 finalurl=imglink.get("src")
-                
-        # using finalurl we get the whole image into image
-        image=urllib.urlopen(finalurl)
+
+        try:
+                # using finalurl we get the whole image into image
+                image=urllib.urlopen(finalurl)
+        except:
+                import sys
+                # prints `type(e), e` where `e` is the last exception
+                print sys.exc_info()[:2]
+                return "try"
         
         # check if its a image we are dealing with
         if image.headers.maintype=="image":
@@ -49,7 +54,8 @@ def download(url, filename, path1):
                 #close both handles
                 download.close()
                 image.close()
-                
+
+                return "done"
                    
 
 
@@ -64,7 +70,7 @@ ch_no=58
 path='C:\\Users\\Aditya\\Desktop\\Work\\WallPapers\\Manga\\'
 
 # this downloads chapters 5 to 97
-for j in range(4,97):
+for j in range(8,97):
         # base[0:34] give the first 34 characters
         tempurl=base[0:34]+str(ch_no+j)+"-"
         #check if the folder for the 'i+1'th chapter exists
@@ -75,16 +81,18 @@ for j in range(4,97):
                 temppath=path+str(j+1)+"\\"
                 
         # the loop over the pages
-        for i in range(39):
+        for i in range(42):
                 finalurl=tempurl+str(i+1)+base[38:]
                 name=str(i+1)+".jpg"
                 #checks for 404 error
                 check=requests.head(finalurl)
                 if check.status_code==404:
                         break
-                        
-#call the function to start downloading!
-                download(finalurl,name,temppath)
+
+                con="try"
+                while(con=="try"):
+                        #call the function to start downloading!
+                        con=download(finalurl,name,temppath)
         
 
         
