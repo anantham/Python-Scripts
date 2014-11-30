@@ -4,10 +4,11 @@ from bs4 import BeautifulSoup
 import os
 import requests
 import socket
+from time import sleep
 
 def download(url, filename, path1):
 
-        # open the page url and get the html shit into page
+        # open the page url and get the html stuff into the page variable
         page=urllib2.urlopen(url)
         
         #soupyfy it and store in soup
@@ -26,36 +27,35 @@ def download(url, filename, path1):
         try:
                 # using finalurl we get the whole image into image
                 image=urllib.urlopen(finalurl)
-        except:
+                if not(image.headers.maintype=="image"):
+                        print "not a image"
+                        return "done"
+        except requests.exceptions.ConnectionError:
                 import sys
                 # prints `type(e), e` where `e` is the last exception
                 print sys.exc_info()[:2]
                 return "try"
+                
+        # read the file into buf
+        buf=image.read()
         
-        # check if its a image we are dealing with
-        if image.headers.maintype=="image":
-                
-                # read the file into buf
-                buf=image.read()
-                
-                # simply catenate the strings to get the file path
-                # path1 is the path of the file's location
-                filepath="%s%s" % (path1,filename)
+        # simply catenate the strings to get the file path
+        # path1 is the path of the file's location
+        filepath="%s%s" % (path1,filename)
+        # print the message to show we have done it
+        print filename+" stored to "+filepath
+        
+        # open a file handle to write with
+        download=file(filepath,"wb")
 
-                # print the message to show we have done it
-                print filename+" stored to "+filepath
+        # WRITE file to location
+        download.write(buf)
 
-                # open a file handle to write with
-                download=file(filepath,"wb")
+        #close both handles
+        download.close()
+        image.close()
 
-                # WRITE file to location
-                download.write(buf)
-
-                #close both handles
-                download.close()
-                image.close()
-
-                return "done"
+        return "done"
                    
 
 
@@ -70,15 +70,16 @@ ch_no=58
 path='C:\\Users\\Aditya\\Desktop\\Work\\WallPapers\\Manga\\'
 
 # this downloads chapters 5 to 97
-for j in range(8,97):
+for j in range(1,97):
         # base[0:34] give the first 34 characters
         tempurl=base[0:34]+str(ch_no+j)+"-"
         #check if the folder for the 'i+1'th chapter exists
         if not os.path.exists(path+str(j+1)+"\\"):
                 #if not make it
                 os.makedirs(path+str(j+1)+"\\")
-                #and store the pages of the chapter in the chapter folder by changing the path
-                temppath=path+str(j+1)+"\\"
+        #and store the pages of the chapter in the chapter folder by changing the path
+        temppath=path+str(j+1)+"\\"
+                
                 
         # the loop over the pages
         for i in range(42):
@@ -91,7 +92,12 @@ for j in range(8,97):
 
                 con="try"
                 while(con=="try"):
-                        #call the function to start downloading!
+                        # this is in order to avoid the 'Max retries exceeded with url' error
+                        # this actually means No connection could be made because the
+                        # target machine actively refused it
+                        sleep(.05)
+                        
+                        # call the function to start downloading!
                         con=download(finalurl,name,temppath)
         
 
