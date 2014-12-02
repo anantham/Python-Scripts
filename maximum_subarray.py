@@ -11,12 +11,15 @@ print "Enter the number of elements in the entire Array"
 no=int(raw_input())
 
 array=[]
-for i in range(0,no):
+
+# the array we store in array is from 0 to no-1 ( index values )
+for i in range(no):
     print "Enter "+str(i+1)+"th character"
     array.append(int(raw_input()))
 
-print "For divide and Conquer press 1 for dynamic programming press 2"
+print "To solve using divide and Conquer press 1 and for dynamic programming press 2"
 choice=int(raw_input())
+
 # Stratagy -
 
 # here start is the first element in the passed array,end is the last and
@@ -47,8 +50,8 @@ choice=int(raw_input())
 # we can find them in linear time.
 
 # Start coding!
-
-#   Some utility functions to find the sum of 2 or 3 integers (which we will have to do many times!)
+    
+#   Two functions to find the largest among 2 or 3 integers
 # 2 numbers
 def max2(a,b):
     if a>=b:
@@ -56,6 +59,7 @@ def max2(a,b):
         return a
     else:
         return b
+    
 # 3 numbers 
 def max(a,b,c):
     return(max2(a,max2(b,c)))
@@ -63,6 +67,10 @@ def max(a,b,c):
 # to find the max subarray in the 3rd case
 # a is the array, start, mid and end are the respective array indices
 def maxsubarray3(a,start,mid,end):
+    # if want to find the actual subarray which gives us this maximum value for its sum
+    ansstart=mid
+    ansend=mid+1
+
     # we need to find both sums of the left maxsubarray and the right maxsubarray.
     # the sum of which will be the sum of the joint subarray (from i to j) the actual max subarray of a
     # where i and j are such that,
@@ -74,32 +82,36 @@ def maxsubarray3(a,start,mid,end):
     tempsum=0
     # keeps track of the current top sum (for the left half)
     # initially keep it as a very negative number 
-    leftsum=-999999999999
+    leftsum=-1
     
     # lets take first half and find the maximum subarray,
     # start from mid and by decrementing ( therefore the -1 )
-    # and go till the 2nd element ( therefore till array indice 1 ) 
-    for i in range(mid,0,-1):
+    # and go till the 1st element ( therefore till array indice start )
+    # ( Note that the range(a,b,c) function  produces a list of a,a+c,a+2c,.. so on till b-1 )
+    # ( we need to write start-1 to get till start )
+    for i in range(mid,start-1,-1):
         tempsum=tempsum+a[i]
         if(tempsum>leftsum):
             # the new top sum
             leftsum=tempsum
+            ansstart=i
             
     # just like how we got the leftsum, repeat for right sum.
-        
     tempsum=0 
-    rightsum=-999999999999
+    rightsum=-1
 
     # we now check for all possible subarrays in the right half, ie
     # mid+1 till end ( Note that the range(a,b,c) function
     # produces a list of a,a+c,a+2c,.. so on till b-1 )
-    for j in range(mid+1,end+1,1):
-        tempsum=tempsum+a[i]
+    for j in range(mid+1,end+1):
+        tempsum=tempsum+a[j]
         if(tempsum>rightsum):
             # the new top sum
             rightsum=tempsum
+            ansend=j
 
     # now the actualsum of the max subarray in 3rd case is returned
+    print "start at "+str(ansstart)+" index ends at the "+str(ansend)+" index for the sum of "+str(rightsum+leftsum)
     return (rightsum+leftsum)
 
 # Actual function to solve the max subarray problem
@@ -109,12 +121,20 @@ def maxsubarray(a,start,end):
     if(start==end):
         return a[start]
 
-    # find mid
-    mid=(start+end)/2
+    # find mid - an integer as its going to be used as a index
+    mid=int((start+end)/2)
 
     # now we can find the maximum of the 3 cases
-    return max(maxsubarray(a,1,mid),maxsubarray(a,mid+1,end),maxsubarray3(a,1,mid,end))
+    # we divide the array a into 2 parts (0 to mid) and (mid+1 to end), if the "maxsubarray" is a subarray of these 2 halfs we can find so by calling recursively
+    # else if the subarray we seek is that which crosses the middle element, then we call the maxsubarray3 function
+    return max(maxsubarray(a,start,mid),maxsubarray(a,mid+1,end),maxsubarray3(a,start,mid,end))
 
                
 # now to test these functions out
-print "the maxsubarray has the value "+str(maxsubarray(array,0,no-1))
+if(choice==1):
+    print "Maximum contiguous sum is "+str(maxsubarray(array,0,no-1))+" for the array "
+    print array
+    print "The subarray is "
+    print array[ansstart:ansend+1]
+elif(choice==2):
+    print "functionality will be added soon"
