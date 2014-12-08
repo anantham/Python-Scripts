@@ -50,19 +50,6 @@ choice=int(raw_input())
 # we can find them in linear time.
 
 # Start coding!
-    
-#   Two functions to find the largest among 2 or 3 integers
-# 2 numbers
-def max2(a,b):
-    if a>=b:
-        # left bais - favor left argument in case of draw
-        return a
-    else:
-        return b
-    
-# 3 numbers 
-def max(a,b,c):
-    return(max2(a,max2(b,c)))
 
 # to find the max subarray in the 3rd case
 # a is the array, start, mid and end are the respective array indices
@@ -111,7 +98,7 @@ def maxsubarray3(a,start,mid,end):
             ansend=j
 
     # now the actualsum of the max subarray in 3rd case is returned
-    print "start at "+str(ansstart)+" index ends at the "+str(ansend)+" index for the sum of "+str(rightsum+leftsum)
+    # print "start at "+str(ansstart)+" index ends at the "+str(ansend)+" index for the sum of "+str(rightsum+leftsum)
     return (rightsum+leftsum)
 
 # Actual function to solve the max subarray problem
@@ -134,7 +121,20 @@ def maxsubarray(a,start,end):
 if(choice==1):
     print "Maximum contiguous sum is "+str(maxsubarray(array,0,no-1))+" for the array "
     print array
-    print "The subarray is "
-    print array[ansstart:ansend+1]
+    # print "The subarray is "
+    # print array[ansstart:ansend+1]
 elif(choice==2):
-    print "functionality will be added soon"
+    # we have both as 0 as when we dont want ans_sum to drop below 0
+    # and because maxsum_upto_j is used in the initial assignment
+    ans_sum=maxsum_upto_j=0
+    # to find for 'array' of size 'no' - 
+    # and as we find the various maxsubarray's at each j 
+    for j in range(no):
+        # we find the sum of the maxsubarray with the end index as 'j'
+        maxsum_upto_j=max(0,maxsum_upto_j+array[j])
+        # check if adding of the next element causes this sum to increase, if so update the ans
+        ans_sum=max(ans_sum,maxsum_upto_j)
+
+    print "The sum is "+str(ans_sum)
+    
+    
