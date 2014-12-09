@@ -1,0 +1,257 @@
+Python 2.7.8 (default, Jun 30 2014, 16:08:48) [MSC v.1500 64 bit (AMD64)] on win32
+Type "copyright", "credits" or "license()" for more information.
+>>> ================================ RESTART ================================
+>>> 
+enter the number of nodes in the graph
+10
+enter the Node no:1's key
+a
+enter the Node no:2's key
+b
+enter the Node no:3's key
+c
+enter the Node no:4's key
+d
+enter the Node no:5's key
+e
+enter the Node no:6's key
+f
+enter the Node no:7's key
+g
+enter the Node no:8's key
+h
+enter the Node no:9's key
+i
+enter the Node no:10's key
+j
+enter the number of edges in the graph
+21
+For the Edge no:1
+of the 2 nodes involved in this edge 
+enter the first Node's key
+a
+
+enter the second Node's key
+b
+
+enter the cost (or weight) of this edge (or arc) - an integer
+9
+For the Edge no:2
+of the 2 nodes involved in this edge 
+enter the first Node's key
+a
+
+enter the second Node's key
+c
+
+enter the cost (or weight) of this edge (or arc) - an integer
+9
+For the Edge no:3
+of the 2 nodes involved in this edge 
+enter the first Node's key
+a
+
+enter the second Node's key
+f
+
+enter the cost (or weight) of this edge (or arc) - an integer
+8
+For the Edge no:4
+of the 2 nodes involved in this edge 
+enter the first Node's key
+a
+
+enter the second Node's key
+j
+
+enter the cost (or weight) of this edge (or arc) - an integer
+18
+For the Edge no:5
+of the 2 nodes involved in this edge 
+enter the first Node's key
+b
+
+enter the second Node's key
+c
+
+enter the cost (or weight) of this edge (or arc) - an integer
+3
+For the Edge no:6
+of the 2 nodes involved in this edge 
+enter the first Node's key
+b
+
+enter the second Node's key
+e
+
+enter the cost (or weight) of this edge (or arc) - an integer
+6
+For the Edge no:7
+of the 2 nodes involved in this edge 
+enter the first Node's key
+c
+
+enter the second Node's key
+e
+
+enter the cost (or weight) of this edge (or arc) - an integer
+4
+For the Edge no:8
+of the 2 nodes involved in this edge 
+enter the first Node's key
+c
+
+enter the second Node's key
+d
+
+enter the cost (or weight) of this edge (or arc) - an integer
+2
+For the Edge no:9
+of the 2 nodes involved in this edge 
+enter the first Node's key
+c
+
+enter the second Node's key
+f
+
+enter the cost (or weight) of this edge (or arc) - an integer
+9
+For the Edge no:10
+of the 2 nodes involved in this edge 
+enter the first Node's key
+d
+
+enter the second Node's key
+e
+
+enter the cost (or weight) of this edge (or arc) - an integer
+2
+For the Edge no:11
+of the 2 nodes involved in this edge 
+enter the first Node's key
+d
+
+enter the second Node's key
+f
+
+enter the cost (or weight) of this edge (or arc) - an integer
+8
+For the Edge no:12
+of the 2 nodes involved in this edge 
+enter the first Node's key
+d
+
+enter the second Node's key
+g
+
+enter the cost (or weight) of this edge (or arc) - an integer
+9
+For the Edge no:13
+of the 2 nodes involved in this edge 
+enter the first Node's key
+e
+
+enter the second Node's key
+g
+
+enter the cost (or weight) of this edge (or arc) - an integer
+9
+For the Edge no:14
+of the 2 nodes involved in this edge 
+enter the first Node's key
+f
+
+enter the second Node's key
+g
+
+enter the cost (or weight) of this edge (or arc) - an integer
+7
+For the Edge no:15
+of the 2 nodes involved in this edge 
+enter the first Node's key
+f
+
+enter the second Node's key
+i
+
+enter the cost (or weight) of this edge (or arc) - an integer
+9
+For the Edge no:16
+of the 2 nodes involved in this edge 
+enter the first Node's key
+f
+
+enter the second Node's key
+j
+
+enter the cost (or weight) of this edge (or arc) - an integer
+10
+For the Edge no:17
+of the 2 nodes involved in this edge 
+enter the first Node's key
+g
+
+enter the second Node's key
+i
+
+enter the cost (or weight) of this edge (or arc) - an integer
+5
+For the Edge no:18
+of the 2 nodes involved in this edge 
+enter the first Node's key
+g
+
+enter the second Node's key
+h
+
+enter the cost (or weight) of this edge (or arc) - an integer
+4
+For the Edge no:19
+of the 2 nodes involved in this edge 
+enter the first Node's key
+h
+
+enter the second Node's key
+i
+
+enter the cost (or weight) of this edge (or arc) - an integer
+1
+For the Edge no:20
+of the 2 nodes involved in this edge 
+enter the first Node's key
+h
+
+enter the second Node's key
+j
+
+enter the cost (or weight) of this edge (or arc) - an integer
+4
+For the Edge no:21
+of the 2 nodes involved in this edge 
+enter the first Node's key
+i
+
+enter the second Node's key
+j
+
+enter the cost (or weight) of this edge (or arc) - an integer
+3
+enter the maximum weight possible for any of edges in the graph
+20
+
+The edges with thier unsorted weights are
+{('g', 'e'): [9], ('b', 'c'): [3], ('e', 'd'): [2], ('h', 'i'): [1], ('d', 'e'): [2], ('i', 'h'): [1], ('f', 'd'): [8], ('c', 'b'): [3], ('e', 'c'): [4], ('a', 'b'): [9], ('g', 'd'): [9], ('c', 'f'): [9], ('f', 'a'): [8], ('e', 'g'): [9], ('d', 'f'): [8], ('d', 'g'): [9], ('c', 'a'): [9], ('h', 'j'): [4], ('e', 'b'): [6], ('i', 'g'): [5], ('d', 'c'): [2], ('c', 'e'): [4], ('g', 'h'): [4], ('b', 'a'): [9], ('i', 'j'): [3], ('j', 'h'): [4], ('a', 'f'): [8], ('j', 'a'): [18], ('i', 'f'): [9], ('f', 'j'): [10], ('c', 'd'): [2], ('h', 'g'): [4], ('f', 'c'): [9], ('g', 'i'): [5], ('j', 'f'): [10], ('g', 'f'): [7], ('j', 'i'): [3], ('b', 'e'): [6], ('f', 'g'): [7], ('a', 'c'): [9], ('a', 'j'): [18], ('f', 'i'): [9]}
+
+After sorting
+[(('h', 'i'), [1]), (('i', 'h'), [1]), (('e', 'd'), [2]), (('d', 'e'), [2]), (('d', 'c'), [2]), (('c', 'd'), [2]), (('b', 'c'), [3]), (('c', 'b'), [3]), (('i', 'j'), [3]), (('j', 'i'), [3]), (('e', 'c'), [4]), (('h', 'j'), [4]), (('c', 'e'), [4]), (('g', 'h'), [4]), (('j', 'h'), [4]), (('h', 'g'), [4]), (('i', 'g'), [5]), (('g', 'i'), [5]), (('e', 'b'), [6]), (('b', 'e'), [6]), (('g', 'f'), [7]), (('f', 'g'), [7]), (('f', 'd'), [8]), (('f', 'a'), [8]), (('d', 'f'), [8]), (('a', 'f'), [8]), (('g', 'e'), [9]), (('a', 'b'), [9]), (('g', 'd'), [9]), (('c', 'f'), [9]), (('e', 'g'), [9]), (('d', 'g'), [9]), (('c', 'a'), [9]), (('b', 'a'), [9]), (('i', 'f'), [9]), (('f', 'c'), [9]), (('a', 'c'), [9]), (('f', 'i'), [9]), (('f', 'j'), [10]), (('j', 'f'), [10]), (('j', 'a'), [18]), (('a', 'j'), [18])]
+ 
+
+In the graph with these vertex's
+['a', 'c', 'b', 'e', 'd', 'g', 'f', 'i', 'h', 'j']
+
+ With these edges between the vertexes given above, we obtain a Minimal Spanning Tree
+
+{('b', 'c'): [3], ('g', 'f'): [7], ('e', 'd'): [2], ('h', 'i'): [1], ('g', 'h'): [4], ('f', 'd'): [8], ('f', 'a'): [8], ('d', 'c'): [2], ('i', 'j'): [3]}
+
+ Please note this is a dictionary with  key as the weight of the edge and value as the key's of the two vertex's involved in this edge
+>>> 

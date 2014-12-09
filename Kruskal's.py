@@ -125,10 +125,11 @@ for i in range(no_edges):
     # add the edge with this info
     the_graph.addEdge(node1_key,node2_key,cost)
     the_graph.addEdge(node2_key,node1_key,cost)
-
+"""
+AS we wont be using counting sort
 print "enter the maximum weight possible for any of edges in the graph"
 max_weight=int(raw_input())
-
+"""
 # graph DONE - start MST finding
 
 # step 1 : Take all edges and sort them
@@ -300,10 +301,10 @@ for vertex_pair in sorted_weights:
 print " \n\nIn the graph with these vertex's"
 print the_graph.getVertices()
 
-print "\n With these "+str(len(MST))+" edges between the vertexes given above, we obtain a Minimal Spanning Tree\n"
+print "\nWith these "+str(len(MST))+" edges between the vertexes given above, we obtain a Minimal Spanning Tree\n"
 print MST
 
-print "\n Please note this is a dictionary with  key as the weight of the edge and value as the key's of the two vertex's involved in this edge"
+print "\nPlease note this is a dictionary with  key as the weight of the edge and value as the key's of the two vertex's involved in this edge"
 
 # I HAVE TESTED THIS IMPLEMENTATION WITH THE SAMPLE PROBLEM GIVEN IN WIKIPEDIA
 # THE IMAGE OF THE GRAPH AND THE ONLY MST IS INCLUDED IN THE REPO, ALONG WITH THE
