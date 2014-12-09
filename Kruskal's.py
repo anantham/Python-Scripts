@@ -6,6 +6,9 @@
 # entering too many nodes and edges.The adjacency matrix is a good implementation
 # for a graph when the number of edges is large.So i wont be using that here
 
+# for sorting purpose
+import operator
+
 # Vertex, which will represent each vertex in the graph.Each Vertex uses a dictionary
 # to keep track of the vertices to which it is connected, and the weight of each edge. 
 class Vertex:
@@ -130,6 +133,8 @@ max_weight=int(raw_input())
 
 # step 1 : Take all edges and sort them
 
+'''
+not required as of now
 #  Time Complexity of Solution:
 #  Best Case O(n+k); Average Case O(n+k); Worst Case O(n+k),
 #  where n is the size of the input array and k means the
@@ -151,6 +156,7 @@ def counting_sort(weights,max_weight):
             ndx += 1
             # reset the counter back to the set of zero's
             counter[i] -= 1
+'''
 
 # now we have a optimal sorting function in hand, lets sort the list of edges.
 # a dictionary with weights of an edge and the vertexes involved in that edge.
@@ -159,18 +165,17 @@ vrwght={}
 for ver1 in the_graph:
     # take every vertex ver1 is connected to = ver2
     for ver2 in ver1.getConnections():
-        # make the dictionary with the weights and the 2 vertex's involved with the edge (thier key)
-        vrwght[ver1.connectedTo[ver2]]=[ver1.getId(),ver2.getId()]
+        # make the dictionary with the weights and the 2 vertex's involved with the
+        # edge (thier key) use the pair of vertex's id as the key to avoid uniqueness
+        # problems in the dictionary, mutliple edges might have the SAME weight 
+        vrwght[ver1.getId(),ver2.getId()]=[ver1.connectedTo[ver2]]
 
 print "\nThe edges with thier unsorted weights are"
 print vrwght
 
-temp_weights=vrwght.keys()
-counting_sort(temp_weights,max_weight)
 
-sorted_weights={}
-for weight in temp_weights:
-    sorted_weights[weight]=vrwght[weight]
+
+sorted_weights=sorted(vrwght.items(), key=operator.itemgetter(1))
 
 print "\nAfter sorting"
 print sorted_weights
@@ -265,28 +270,44 @@ for vertex_key in the_graph.getVertices():
     # execute FIND for all the vertex's in the_graph
     X[the_graph.getVertex(vertex_key)]
 
+
+
+
+for i in range(len(sorted_weights)):
+    if(X[the_graph.getVertex(sorted_weights[i][0][0])]==X[the_graph.getVertex(sorted_weights[i][0][1])]):
+        pass
+    else:
+        MST[sorted_weights[i][0]]=sorted_weights[i][1]
+        X.union(the_graph.getVertex(sorted_weights[i][0][0]),the_graph.getVertex(sorted_weights[i][0][1]))
+        
+'''
 # now the UNION.
-for weight in sorted_weights:
+for vertex_pair in sorted_weights:
+    print vertex_pair
     # here sorted_weights[weight] gives the set of 2 vertex's involved in the that edge
-    if(X[the_graph.getVertex(sorted_weights[weight][0])]==X[the_graph.getVertex(sorted_weights[weight][1])]):
+    if(X[the_graph.getVertex(vertex_pair[0][0])]==X[the_graph.getVertex(vertex_pair[0][1])]):
         # if both vertices have the same parent (name) then they are in the same set, so ignore this edge
         pass
     else:
         # else as they belong to different sets we can ADD this edge to the MST (MST will be a subset of sorted_weights)
-        MST[weight]=sorted_weights[weight]
+        MST[vertex_pair[0]]=sorted_weights[vertex_pair[0]]
         # and merge the sets these two vertices belong to thus we call union on them.
-        X.union(the_graph.getVertex(sorted_weights[weight][0]),the_graph.getVertex(sorted_weights[weight][1]))
+        X.union(the_graph.getVertex(vertex_pair[0]),the_graph.getVertex(vertex_pair[1]))
+'''
 
 # thus we have the MST done
 
 print " \n\nIn the graph with these vertex's"
 print the_graph.getVertices()
 
-print "\n With these edges between the vertexes given above, we obtain a Minimal Spanning Tree\n"
+print "\n With these "+str(len(MST))+" edges between the vertexes given above, we obtain a Minimal Spanning Tree\n"
 print MST
 
 print "\n Please note this is a dictionary with  key as the weight of the edge and value as the key's of the two vertex's involved in this edge"
-        
+
+# I HAVE TESTED THIS IMPLEMENTATION WITH THE SAMPLE PROBLEM GIVEN IN WIKIPEDIA
+# THE IMAGE OF THE GRAPH AND THE ONLY MST IS INCLUDED IN THE REPO, ALONG WITH THE
+# COMMANDLINE I/O OF TESTING, BOTH ARE SAVED AS Kruskal_test (.jpg and .txt respectively)
         
     
     
