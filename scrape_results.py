@@ -46,7 +46,7 @@ class student:
 
 	GPA = '7.57'
 
-for roll_number in range(110113099,110113100):
+for roll_number in range(106113001,106113100):
     
     # intialize a empty list in which the students data will be stored
     temp_data=[]
@@ -177,7 +177,7 @@ for roll_number in range(110113099,110113100):
     # and  save this information
     pickle.dump(temp_student, file_handler)
 
-    print "stored "+temp_data[0][0][16:55]+"'s student "+temp_student.name+"'s "+temp_data[0][0][0:15]+temp_data[0][0][56:64]+" marks to memory."
+    print "stored "+temp_data[0][0][16:55]+"'s student ("+temp_student.rollno+") "+temp_student.name+"'s "+temp_data[0][0][0:15]+" marks to memory."
     
 
 

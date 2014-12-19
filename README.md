@@ -34,6 +34,11 @@
 	a test I conducted with a graph and the image of the graph and its only MST.
 	These are the Kruskal\_test.txt and Kruskal\_test.jpg 
 	I have used part of this code to answer [this question][4]
+* **scrape_results**
+	This is a script I had planned to write for some time now, After the second semester results came 
+	the first semester results werent available in the site. So now as third semester results are approaching
+	I thought of writing this script which just automates the result gathering process, and stores the result
+	in my custom class, which is stored to disk as a .student file (ususally just 2KB).
 
 [1]: https://superuser.com/questions/330297/automate-logging-in-through-sonicwall/785792?noredirect=1#comment1023176_785792
 [2]: http://relativetoaditya.blogspot.in/2014/12/maximum-subarray.html
