@@ -1,9 +1,15 @@
+# for controlling the browser
 from selenium import webdriver
-#from time import sleep
+# for soup what else?! (to parse the data)
 from bs4 import BeautifulSoup
+# to emulate pressing enter instead of getting the button and clicking it
 from selenium.webdriver.common.keys import Keys
+# To select 2nd sem from drop down list
 from selenium.webdriver.support.ui import Select
+# To convert an object into data that can be handled as a chunk, remember Writing things to file is the file objects responsibility.
 import pickle
+# because otherwise python doesnt recognise the error I specified and throws a NameError: name 'NoSuchElementException' is not defined
+from selenium.common.exceptions import NoSuchElementException
 
 # open a window of firefox
 driver = webdriver.Firefox()
@@ -40,7 +46,7 @@ class student:
 
 	GPA = '7.57'
 
-for roll_number in range(110113001,110113099):
+for roll_number in range(110113099,110113100):
     
     # intialize a empty list in which the students data will be stored
     temp_data=[]
@@ -55,8 +61,15 @@ for roll_number in range(110113001,110113099):
     rollno.send_keys(str(roll_number))
     rollno.send_keys(Keys.RETURN)
 
-    # Get the dropdown menu into the select wrapper with which
-    select = Select(driver.find_element_by_id("Dt1"))
+    # in some cases the specified roll number will not have a student
+    # thus no element from which we can select 2nd semester appears on the
+    # webpage. To catch this NoSuchElementException:
+    try:
+        # Get the dropdown menu into the select wrapper with which
+        select = Select(driver.find_element_by_id("Dt1"))
+    except NoSuchElementException:
+        print "No student corresponding to this rollnumber : "+str(roll_number)+" Exists in the database"
+        continue
     # we select the "student's" 2nd semester marks as our area of intrest
     select.select_by_visible_text("MAY-2014(REGULAR)")
 
@@ -164,7 +177,7 @@ for roll_number in range(110113001,110113099):
     # and  save this information
     pickle.dump(temp_student, file_handler)
 
-    print "stored "+temp_data[0][0]+"'s student"+temp_student.name+"'s information to memory."
+    print "stored "+temp_data[0][0][16:55]+"'s student "+temp_student.name+"'s "+temp_data[0][0][0:15]+temp_data[0][0][56:64]+" marks to memory."
     
 
 
