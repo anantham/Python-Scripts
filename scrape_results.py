@@ -46,7 +46,7 @@ class student:
 
 	GPA = '7.57'
 
-for roll_number in range(106113001,106113100):
+for roll_number in range(110113000,110113100):
     
     # intialize a empty list in which the students data will be stored
     temp_data=[]
@@ -70,8 +70,9 @@ for roll_number in range(106113001,106113100):
     except NoSuchElementException:
         print "No student corresponding to this rollnumber : "+str(roll_number)+" Exists in the database"
         continue
+
     # we select the "student's" 2nd semester marks as our area of intrest
-    select.select_by_visible_text("MAY-2014(REGULAR)")
+    select.select_by_visible_text("NOV-2014(REGULAR)")
 
     # now that we have the table which hold the data in the page
     # lets form a list with this data, a list for each student!
@@ -113,6 +114,12 @@ for roll_number in range(106113001,106113100):
         temp_list.append(ele)
     assert temp_list == [u'Sr.No.', u'Course Code', u'Course Name', u'Credit', u'Grade', u'Attendance Grade']
 
+
+    # in some departments the number of courses is 8 and sometimes 9
+    # we can determine it by the position of the 'Total No. of Credits Earned' as
+    # it will pushed down respectively.
+    if('Total No. of Credits Earned'==temp_data[14][0]):
+            number_of_courses = 8
     # the following are as u can see the different rows of the table
     # 5 corresponds to Sr.No. 1 and 6 -> 2 etc..
     temp_list=[]
@@ -154,20 +161,14 @@ for roll_number in range(106113001,106113100):
     for ele in temp_data[12]:
         temp_list.append(ele)
     temp_student.srno8 = temp_list
-
-    temp_list=[]
-    for ele in temp_data[13]:
-        temp_list.append(ele)
-    temp_student.srno9 = temp_list
-
-
+    
     # The credits of this semester
-    temp_student.total_registed = temp_data[14][1]
+    temp_student.total_registed = temp_data[13][1]
 
-    temp_student.total_earned = temp_data[15][1]
+    temp_student.total_earned = temp_data[14][1]
 
     # the last entry in the nested list The GPA
-    temp_student.GPA = temp_data[16][1]
+    temp_student.GPA = temp_data[15][1]
 
     # now for this student we have his data stored in temp_student
 
@@ -177,7 +178,7 @@ for roll_number in range(106113001,106113100):
     # and  save this information
     pickle.dump(temp_student, file_handler)
 
-    print "stored "+temp_data[0][0][16:55]+"'s student ("+temp_student.rollno+") "+temp_student.name+"'s "+temp_data[0][0][0:15]+" marks to memory."
+    print "stored "+temp_data[0][0][15:55]+"'s student ("+temp_student.rollno+") "+temp_student.name+"'s "+temp_data[0][0][0:15]+" marks to memory."
     
 
 
