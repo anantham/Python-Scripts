@@ -52,3 +52,5 @@ docs/_build/
 
 # PyBuilder
 target/
+# thumb files are used by windows to cache a image for thumbnails
+[Tt]humbs.db

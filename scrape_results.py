@@ -11,6 +11,9 @@ import pickle
 # because otherwise python doesnt recognise the error I specified and throws a NameError: name 'NoSuchElementException' is not defined
 from selenium.common.exceptions import NoSuchElementException
 
+START_ROLL_NUMBER = 110113006;
+END_ROLL_NUMBER = 110113099
+
 # open a window of firefox
 driver = webdriver.Firefox()
 
@@ -46,7 +49,7 @@ class student:
 
 	GPA = '7.57'
 
-for roll_number in range(110113000,110113100):
+for roll_number in range(START_ROLL_NUMBER,END_ROLL_NUMBER+1):
     
     # intialize a empty list in which the students data will be stored
     temp_data=[]

@@ -13,7 +13,8 @@ driver = webdriver.Firefox()
 driver.get("https://192.168.20.1/auth1.html")
 # The next line is an assertion to confirm that title has “Sonic” word in it: (not really neccesary :p)
 # This is used to confirm that the webpage is the right one
-assert "Sonic" in driver.title
+# some sites may not have it
+# assert "Sonic" in driver.title
 # we use the 'name' tag to get a handle to the username and password  this finds the appropriate box.
 user = driver.find_element_by_name("userName")
 passwd = driver.find_element_by_name("pwd")

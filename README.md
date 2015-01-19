@@ -1,7 +1,15 @@
-##Python-Scripts
-====================
+## Python-Scripts
 
 **A _motley_ collection of python scripts. These are the different programs I wrote for fun.**
+
+### Usage
+
+* Install python 2.7.9 in your system. You can find it [here][5].
+
+* Just download this file to your computer OR copy the code into a text editor and save it as filename.py
+
+* Double click on the file to run OR open the command line there and type 
+	'python filename.py'
 
 * **Root.py**
 	This is a program which takes a integer greater than or equal to one and 
@@ -44,3 +52,4 @@
 [2]: http://relativetoaditya.blogspot.in/2014/12/maximum-subarray.html
 [3]: https://en.wikipedia.org/wiki/Minimum_spanning_tree
 [4]: https://stackoverflow.com/questions/14369739/creating-adjacency-lists-from-dicts-in-python/27380835#27380835
+[5]: https://www.python.org/ftp/python/2.7.9/python-2.7.9.msi
