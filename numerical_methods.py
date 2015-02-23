@@ -4,12 +4,12 @@
 # DEFINE FUNCTION IN THE CODE for now
 # the polynomial is defined here
 def poly(x):
-    #return (x*x+x-pi*pi-pi)
+    return (5*x*x*x+3*x+4)
 
     #from math import exp
     #return (exp(x)+x)
 
-    return (x+5)*(x*x-5)
+    #return (3*x*x-2*x-8)
 
 found = stop = False
 digits = 4
