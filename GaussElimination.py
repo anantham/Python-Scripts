@@ -11,7 +11,7 @@ number_of_variables = 0
 def storeIntoMatrix(A,n,m):
     print "\n Now enter the values for the " + str(n) + "x" + str(m) + " matrix"
     for row_number in range(n):
-    	temp_row = []
+        temp_row = []
         for element_number in range(m):
             print "\n Enter the row - " + str(row_number+1) + " and column - " + str(element_number+1) + " element"
             temp_row.append(raw_input())

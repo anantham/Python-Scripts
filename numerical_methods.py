@@ -4,12 +4,7 @@
 # DEFINE FUNCTION IN THE CODE for now
 # the polynomial is defined here
 def poly(x):
-    return (5*x*x*x+3*x+4)
-
-    #from math import exp
-    #return (exp(x)+x)
-
-    #return (3*x*x-2*x-8)
+    return (x*x*x)-(x)- 1
 
 found = stop = False
 digits = 4
@@ -17,22 +12,27 @@ pi = 3.1415926535897932384
 
 # this function will give the x axis'x value at the point in the real line where the chord connecting the points  (a,poly(a)) and (b,poly(b)) cross the xaxis
 def chord_xintercept(a,b):
-    slope = (poly(b)-poly(a))/(b-a)
-    
-    x_a = a +  (-1*poly(a))/slope
-    x_b = b - poly(b)/slope
-    if(x_a == x_b):
-        return x_a
-    else:
-        # debugging
-        print "\nx_a = "+str(x_a)+" "+str(x_a==x_b)
-        print "x_b = "+str(x_b)+"\n"
-        return "done"
+    return a + ( -poly(a) * (b-a) )/( poly(b) - poly(a) )
     
 def regulafalsi(start,end):
+    var = "junk"
+    counter = 0 # to catch var staying on the same side for more than 2 iterations - Illinois algorithm
     while(True):
+        temp = var
         # the coreof this function, 
         var = chord_xintercept(start,end)
+        
+        # we need to check if the same endpoint persists for more than 2 iterations ie Illinois algorithm
+        if(counter >= 2):
+            # we need to bias the next iteration towards start, we have had the last 2 iterations giving us the var towards end's side
+            var = ( poly(end)*start - 0.5*poly(start)*end )/( poly(end) - 0.5*poly(start) )
+        if(counter <= -2):
+            # we need to bias the next iteration towards end, we have had the last 2 iterations giving us the var towards start's side
+            var = ( 0.5*poly(start)*end - poly(end)*start )/( 0.5*poly(start) - poly(end) )
+            
+        # if the maximum precision possible has been reached
+        if(var == temp):
+            return var
         
         # if we are lucky enough to be looking for a root
         # that can be described using a finte number of digits, and find it
@@ -40,32 +40,31 @@ def regulafalsi(start,end):
             return start
         if(poly(end) == 0):
             return end
+        
         # if we have reached the last level of precision possible
         if(var == "done"):
-            if(abs(poly(start))<abs(poly(end))):
+            if( (start - end) <= 10**(-1*digits) ):
+                print (start - end)
                 return start
-            else:
-                return end
-   
-        # Let us establish an alternate base condition, if the required level of precision has been reached,
-        #if(poly(var) <= 10**(-1*digits) and poly(var) >= (-1*(10**(-1*digits)))):
-            #return var
-
+                
         # The root lies in between start and end, never play outside the boundaries :p 
         assert (poly(start)*poly(end) <= 0)
-    
+        
         # check on which side our var is on towards start or end?
-        if( (poly(var)<0 and poly(start)<0) or (poly(var)>0 and poly(start)>0) ):
-            # its on start's side, doesnt matter wheather thats positive or negative
-            # we know that the root is between var and end, the new start is
-            start = var
+        if( poly(var) * poly(end) > 0):
+            # its on end's side, thus the new end is
+            end = var
+            counter = counter + 1
         else:
             # then var has to lie on the other side 
-            end = var
+            start = var
+            counter = counter - 1
+            
         # for debuggind and letting the user know whats happening
         #print "\nThe start,end,var is "+str(start)+" "+str(end)+" "+str(var)
         #print "The start,end,var is "+str(poly(start))+" "+str(poly(end))+" "+str(poly(var))
         print "\nThe root lies between  "+str(start)+" AND "+str(end)+" \n working... shortening the range"
+        print "\n counter is "+str(counter)
 
 # the recursive function to find the root using Bisection Method-
 # what we do is using the range the user helped us find, we start by

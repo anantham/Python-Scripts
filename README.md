@@ -97,6 +97,19 @@ dont hesitate to contact me.
 	Edit the START\_ROLL\_NUMBER and END\_ROLL\_NUMBER to set the range of students you want to save.
 	For reference the roll numbers of my year students are given.
 
+* **rename.py**
+	This script was born out my requirement to mass rename files (anime, tv series, movies)
+	so that Kodi (known as XBMC) would pick it up. I would recommend understanding the code 
+	so that you can make the appropriate changes to it and run it.It will now just show what
+	changes the script will make.
+
+* **numerical_methods**
+	When we got [Janaki Raman Sir](https://tnjanakiraman.wordpress.com/) as our numerical methods teacher
+	in Sem IV, he placed great emphasis on the concepts behind the methods, so I decided to implement them
+	in python. 
+	I havent completed The Illinois method implementation, the regula falsi by itself fails in loads of cases. 
+
+
 
 ### Setting up Library's 
 
