@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from functools import reduce
 from numpy.linalg import matrix_power
 
-N = 5000 # total number of wishes
+N = 2000 # total number of wishes
 pulls = []
 prob = []
 
@@ -25,11 +25,12 @@ def wander():
 
 	# There are only 3 paths out of states Cij; to Ai, Bi or Ci(j+1) for j in 1 to 89, 
 	# the 90th consecutive NON 5 star pull will take you to a 5 star state, either A or B
-	A = 0.0004 # 1/15 of 0.6%
-	B = 0.0056 # 14/15 of 0.6%
+	A = 0.003 # 1/15 of 0.6%
+	B = 0.003 # 14/15 of 0.6%
 	C = 0.994 # 1 - 0.6%
 
-	for i in range(7):
+	# set up connections only for first section of states
+	for i in range(1):
 		for j in range(i*90,(i+1)*90-1):
 			# j is the state index in the matrix
 			M[j][630+i] = B # you get some other 5 star
@@ -37,33 +38,50 @@ def wander():
 			M[j][j+1] = C # you get no 5 star this pull
 
 		# The Archon of Wishes have taken pity on you, the 90th wish or Ci90 state has only 2 paths.
-		M[(i+1)*90-1][630+i] = 0.93333 # 14/15
-		M[(i+1)*90-1][637+i] = 0.06666 # 1/15
+		M[(i+1)*90-1][630+i] = 0.5 # 14/15
+		M[(i+1)*90-1][637+i] = 0.5 # 1/15
 
-		# some other 5 star character, but gotta reset pity i.e. Bi takes you to Ci1
+
+	# let A0 take you to C21 (I am using C1j to keep track of 180 pity)
+	M[637][180] = 1
+
+	# set B0 to C11 and let that set of 90 pulls lead to klee for sure
+	M[630][90] = 1 # if first 90 pity fails to get klee move to C11
+
+	# Assign probabilities for C1j states
+	for j in range(90,179):
+		M[j][637] = A+B # you get klee for sure
+		M[j][j+1] = C # you get no 5 star this pull
+
+	M[179][637] = 1 # 180 pity gets you klee for sure, no need to use A1 or B1
+
+	for i in range(2,7):
+		for j in range(i*90,(i+1)*90-1):
+			# j is the state index in the matrix
+			M[j][630+i] = B # you get some other 5 star
+			M[j][637+i] = A # you get character X
+			M[j][j+1] = C # you get no 5 star this pull
+
+		# The Archon of Wishes have taken pity on you, the 90th wish or Ci90 state has only 2 paths.
+		M[(i+1)*90-1][630+i] = 0.5 
+		M[(i+1)*90-1][637+i] = 0.5
+		
 		M[630+i][i*90] = 1
-		# you are lucky! you got character X so move from Ai to C(i+1)1 but A6 is the last state so except for that
 		if(i != 6):
 			M[637+i][(i+1)*90] = 1
 
-	# You stop playing when you hit A7 - character X has been maxed out
 	M[643][643] = 1
-
-	#remove connection from A0 to C11
-	M[637][90] = 0
-	# let A0 become the end state
-	M[637][637] = 1
 
 	k = 1
 
 	# The probability of moving from state C01 to A7 in k steps is M^k[0][636]
 	while(k<N):
-		temp = matrix_power(M,k)[0][637] # A0 getting once
+		temp = matrix_power(M,k)[0][643] # A0 getting once
 		prob.append(temp)
 		pulls.append(k)
 		k += 1
 
-		if(k%100==0):
+		if(k%10==0):
 			print("Probability of getting character X in "+str(k)+" pulls is "+str(temp))
 
 	fig = plt.figure()
